@@ -15,3 +15,16 @@ class Calculator():
     @staticmethod
     def divide(a, b):
         return a/b
+
+a = int(input(": "))
+b = int(input(": "))
+c = input("type: ")
+
+if c == "+":
+    print(Calculator.add(a, b))
+elif c == "-":
+    print(Calculator.subtract(a, b))
+elif c == "*":
+    print(Calculator.multiply(a, b))
+else:
+    print(Calculator.divide(a, b))

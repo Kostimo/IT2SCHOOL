@@ -1,20 +1,8 @@
-from random import randint
-A = []
-for _ in range(10):
-    num = randint(3, 7)
-    A.append(num)
+A = [4, 8, 2, 4, 4, 6, 8, 2, 4, 2]
 print(A)
-
-k = 0
+B = set(A)
 d = {}
-for i in range(len(A)):
-    m = A[i]
-    for l in range(len(A)):
-        if A[l] == m:
-            k+=1
-    d[m] = k;
-    k=0;
-
-
+for el in B:
+    d[el] = A.count(el);
 print(d)
     

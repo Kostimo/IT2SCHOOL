@@ -1,19 +1,10 @@
-from random import randint
-n = int(input("N: "))
-A = []
-for _ in range(n):
-    num = randint(0, 10)
-    A.append(num)
+A = [1,2,3,4,5,6,7,8,9,10]
+m = int(input("M: "))
 print(A)
 
-m = int(input("M: "))
-B = []
+def shift(lst, sh):
+    x = len(lst) - (sh%len(lst))
+    return lst[x:] + lst[:x]
 
-for i in range(n):
-    if i+m > n-1:
-        B.insert((i+m)%(n-1)-1, A[i])
-    else:
-        B.insert(i+m, A[i])
-
-print(B)
+print(shift(A, m))
 

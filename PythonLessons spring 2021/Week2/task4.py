@@ -1,8 +1,7 @@
 A = []
 print("Enter \"x\" to exit.")
 while True:
-    print("num: ", end="")
-    num = input()
+    num = input("num: ")
     if num == "x":
         break
     else:

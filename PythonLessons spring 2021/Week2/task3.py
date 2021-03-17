@@ -1,13 +1,3 @@
-from random import randint
-A = []
-for _ in range(10):
-    num = randint(3, 7)
-    A.append(num)
-print(A)
-
-B = []
-
-for el in A:
-    if el not in B:
-        B.append(el)
-print(B)
+A = [4, 8, 2, 4, 4, 6, 8, 2, 4, 2]
+B = set(A)
+print(len(B))

@@ -8,9 +8,8 @@ def NOD(a,b):
         else:
             b-=a
     return a
-
-c = NOD(m,n)
+ 
 def NOK(a, b):
-    return f"NOK: {a*b/c}"
+    return f"NOK: {a*b/NOD(m,n)}"
 
 print(NOK(m,n))

@@ -2,21 +2,11 @@ from random import randint
 n = int(input("N: "))
 m = int(input("M: "))
 
-A = []
-for _ in range(n):
-    num = randint(0, 10)
-    A.append(num)
+A = [randint(0,10) for _ in range(n)]
 print(A)
 
-B = []
-for _ in range(m):
-    num = randint(0, 10)
-    B.append(num)
+B = [randint(0,10) for _ in range(m)]
 print(B)
 
-C = []
-for el in A:
-    if el in B:
-        C.append(el)
-
+C = list(set(A) & set(B))
 print(C)
