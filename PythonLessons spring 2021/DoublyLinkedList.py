@@ -21,40 +21,6 @@ class DoublyLinkedList:
             self.head.prev = newBox
         self.head = newBox
         self.length += 1
-
-    # Вставка узлов по индексу
-    def insert(self, index_prevBox, cat):
-        newBox = Box(cat)
-        counter = 0
-        current = self.head
-        if index_prevBox > self.length - 1:
-            index_prevBox = self.length - 1
-        while current is not None:
-            if counter == index_prevBox:
-                newBox.next = current.next
-                current.next = newBox
-                newBox.prev = current
-                if newBox.next is not None:
-                    newBox.next.prev = newBox
-                break
-            current = current.next
-            counter += 1
-        self.length += 1
-
-    # Удаление узлов по индексу
-    def remove(self, index):
-        counter = 0
-        current = self.head
-        while current is not None:
-            if counter + 1 == index:
-                current.next = current.next.next
-                if current.next is not None:
-                    current.next.prev = current
-                self.length -= 1
-                break
-            current = current.next
-            counter += 1
-        print(f"The necessary cat is not on this list ")
     
     # Поиск узлов по индексу
     def index_search(self, index):
@@ -62,7 +28,7 @@ class DoublyLinkedList:
         current = self.head
         while current is not None:
             if counter == index:
-                return current.cat
+                return current
                 break
             current = current.next
             counter += 1
@@ -79,6 +45,39 @@ class DoublyLinkedList:
             counter += 1
         return f"The necessary cat is not on this list "
 
+    # Вставка узлов по индексу
+    def insert(self, index_prevBox, cat):
+        newBox = Box(cat)
+        index = index_prevBox
+        if index > self.length - 1:
+            index = self.length - 1
+        prevBox = self.index_search(index)
+        newBox.next = prevBox.next
+        prevBox.next = newBox
+        newBox.prev = prevBox
+        if newBox.next is not None:
+            newBox.next.prev = newBox
+        self.length += 1
+
+    # Удаление узлов по индексу
+    def remove(self, index):
+        if index > self.length-1:
+            print(f"The necessary cat is not on this list ")
+            return
+        box_to_delete = self.index_search(index)
+        box_to_delete.next = None
+        box_to_delete.prev = None
+        counter = 0
+        current = self.head
+        while current is not None:
+            if counter + 1 == index:
+                current.next = current.next.next
+                if current.next is not None:
+                    current.next.prev = current
+                self.length -= 1
+                break
+            current = current.next
+            counter += 1
 
     # Вывод списка
     def output(self):
