@@ -17,7 +17,7 @@ class DoublyLinkedList:
     def push(self, cat):
         newBox = Box(cat)
         newBox.next = self.head
-        if self.head != None:
+        if self.head is not None:
             self.head.prev = newBox
         self.head = newBox
         self.length += 1
@@ -26,77 +26,74 @@ class DoublyLinkedList:
     def insert(self, index_prevBox, cat):
         newBox = Box(cat)
         counter = 0
-        pointer = self.head
-        while pointer != None:
+        current = self.head
+        if index_prevBox > self.length - 1:
+            index_prevBox = self.length - 1
+        while current is not None:
             if counter == index_prevBox:
-                newBox.next = pointer.next
-                pointer.next = newBox
-                newBox.prev = pointer
-            if counter == index_prevBox + 2:
-                pointer.prev = newBox
+                newBox.next = current.next
+                current.next = newBox
+                newBox.prev = current
+                if newBox.next is not None:
+                    newBox.next.prev = newBox
                 break
-            pointer = pointer.next
+            current = current.next
             counter += 1
         self.length += 1
 
-    # Удаление узлов по индексу             ipsum lorem qwerty end amet
+    # Удаление узлов по индексу
     def remove(self, index):
         counter = 0
-        pointer = self.head
-        while pointer.next != None:
+        current = self.head
+        while current is not None:
             if counter + 1 == index:
-                pointer.next = pointer.next.next
-                if pointer.next != None:
-                    pointer.next.prev = pointer
+                current.next = current.next.next
+                if current.next is not None:
+                    current.next.prev = current
+                self.length -= 1
                 break
-            pointer = pointer.next
+            current = current.next
             counter += 1
         print(f"The necessary cat is not on this list ")
     
     # Поиск узлов по индексу
     def index_search(self, index):
         counter = 0
-        pointer = self.head
-        while pointer.next != None:
+        current = self.head
+        while current is not None:
             if counter == index:
-                return pointer.cat
+                return current.cat
                 break
-            pointer = pointer.next
+            current = current.next
             counter += 1
         return f"The necessary cat is not on this list "
 
     # Поиск узлов по значению
     def value_search(self, cat):
         counter = 0
-        pointer = self.head
-        while pointer.next != None:
-            if pointer.cat == cat:
-                return f"Cat \'{pointer.cat}\' has been found by index {counter}"
-            pointer = pointer.next
+        current = self.head
+        while current is not None:
+            if current.cat == cat:
+                return f"Cat \'{current.cat}\' has been found by index {counter}"
+            current = current.next
             counter += 1
         return f"The necessary cat is not on this list "
 
 
     # Вывод списка
-    def output(self, box):
+    def output(self):
         print("----------")
-        while box != None:
-            print(box.cat)
-            box = box.next
+        current = self.head
+        while current is not None:
+            print(current.cat)
+            current = current.next
 
 lst = DoublyLinkedList()
 lst.push("qwerty")
 lst.push("lorem")
 lst.push("ipsum")
-lst.insert(2, "amet")
-lst.insert(2, "end")
-lst.output(lst.head)
-lst.remove(3)
-lst.output(lst.head)
-lst.remove(3)
-lst.output(lst.head)
-lst.remove(3)
-print(lst.index_search(0))
-print(lst.index_search(-1))
-print(lst.value_search("ipsum"))
-print(lst.value_search("sit"))
+lst.insert(2, "sit")
+lst.insert(7, "test1")
+lst.remove(4)
+lst.output()
+
