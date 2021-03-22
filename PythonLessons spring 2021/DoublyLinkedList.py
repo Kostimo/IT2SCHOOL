@@ -65,19 +65,12 @@ class DoublyLinkedList:
             print(f"The necessary cat is not on this list ")
             return
         box_to_delete = self.index_search(index)
-        box_to_delete.next = None
+        box_to_delete.prev.next = box_to_delete.next
+        if box_to_delete.next is not None:
+                    box_to_delete.next.prev = box_to_delete.prev
         box_to_delete.prev = None
-        counter = 0
-        current = self.head
-        while current is not None:
-            if counter + 1 == index:
-                current.next = current.next.next
-                if current.next is not None:
-                    current.next.prev = current
-                self.length -= 1
-                break
-            current = current.next
-            counter += 1
+        box_to_delete.next = None
+        self.length -= 1
 
     # Вывод списка
     def output(self):
@@ -86,6 +79,7 @@ class DoublyLinkedList:
         while current is not None:
             print(current.cat)
             current = current.next
+        print(f"Length: {self.length}.")
 
 lst = DoublyLinkedList()
 lst.push("qwerty")
